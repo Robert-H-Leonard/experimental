@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Chat Room With Spring</title>
+        <meta name = "description" content="A chat room that uses websockets to manage user sessions and messages">
+        <meta name = "author" content= "Robert Leonard">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel= "stylesheet" href="css/style.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <!-- SockJS -->
+        <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+        <!-- Stomp -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+        <script src="js/websocketevents.js" ></script>
+    </head>
+    <body style="text-align:center">
+        <div class = " container-fluid mainContainer" >
+            <form class = "form-horizontal" id = "signUpForm">
+                <div class = "form-group signUp">
+                    <label for = "username"> Enter Username </label>
+                    <input class = "form-control" type="text" id = "username" placeholder = "username">
+                </div>
+                <div class = " form-group signUp">
+                    <button class = "btn btn-primary btn-lg" type="submit" id = "submitName">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div id="main-content" class="container">
+                <!-- <div class="row">
+                    <div class="col-md-6">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="connect">WebSocket connection:</label>
+                                <button id="connect" class="btn btn-default" type="submit">Connect</button>
+                                <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+                                </button>
+                            </div>
+                        </form>
+                    </div> -->
+                    <!-- <div class="col-md-6">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="name">What is your name?</label>
+                                <input type="text" id="name" class="form-control" placeholder="Your name here...">
+                            </div>
+                            <button id="send" class="btn btn-default" type="submit">Send</button>
+                        </form>
+                    </div> -->
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        <table id="conversation" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Greetings</th>
+                            </tr>
+                            </thead>
+                            <tbody id="greetings">
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
+            </div>
+    </body>
+</html>

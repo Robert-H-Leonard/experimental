@@ -132,13 +132,6 @@ public class WebSocketBrokerIntegrationtest {
         stompSessionHandlers.forEach(handler -> assertNotNull(handler.getPayload()));
     }
 
-    private List<String> createRandomNames(int numberOfNames) {
-        return IntStream.range(0, numberOfNames)
-                .boxed()
-                .map(num -> RandomString.make(10))
-                .collect(Collectors.toList());
-    }
-
     @AfterEach
     public void cleanUp() {
         testApplicationEventListener.setTestSubscribeCalled(false);

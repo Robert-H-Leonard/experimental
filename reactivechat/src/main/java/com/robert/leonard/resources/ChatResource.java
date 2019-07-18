@@ -1,39 +1,38 @@
 package com.robert.leonard.resources;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.robert.leonard.websocket.TestApplicationEventListener;
+import com.robert.leonard.events.ParticipantRepository;
+import com.robert.leonard.events.models.UserSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.annotation.SendToUser;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
-
-import java.util.Collection;
-
-import static com.robert.leonard.constants.WebSocketEndPoints.CHAT_JOIN_APP_PATH;
-import static com.robert.leonard.constants.WebSocketEndPoints.CHAT_PARTICIPANTS_TOPICS_PATH;
 
 @Controller
 @RequiredArgsConstructor
 public class ChatResource {
 
+    private final ParticipantRepository participantRepository;
 
-    private final TestApplicationEventListener eventListener;
-    private final ObjectMapper objectMapper;
-
-    @MessageMapping(CHAT_JOIN_APP_PATH)
-    @SendTo(CHAT_PARTICIPANTS_TOPICS_PATH)
-    public JsonNode greeting(@Payload String message, StompHeaderAccessor headerAccessor) {
-        headerAccessor.getSessionAttributes().put("username", message);
-        return objectMapper.valueToTree(eventListener.getSubscribers());
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/chatroom")
+    public JsonNode addUser(@Payload JsonNode payload,
+                          SimpMessageHeaderAccessor headerAccessor) {
+        String username = payload.get("userName").asText();
+        UserSession userSession = participantRepository.getSession(headerAccessor.getSessionId());
+        userSession.setUsername(username);
+        return payload;
     }
 
+
     @MessageExceptionHandler
-    @SendToUser
-    public void exceptionHandle() {
+    @SendToUser(value = "/queue/errors", broadcast = false)
+    public String exceptionHandle(Throwable t) {
+        return t.getMessage();
     }
 }

@@ -1,0 +1,31 @@
+body {
+    background-color: #18206F;
+}
+
+.mainContainer {
+    text-align: center;
+    background-color: #EAEAEA;
+    margin-top: 3%;
+}
+
+#signUpForm {
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    display: inline-block;
+    margin-top: 15%;
+    margin-bottom: 20px;
+}
+
+.signUp {
+    box-sizing: content-box;
+    margin-top: 10px;
+}
+
+label {
+    font-size: 22px
+}
+
+div label {
+    display: block;
+}
