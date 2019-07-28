@@ -1,1 +1,1 @@
-The goal of this project is to create a funtioning chat room using websockets and the STOMP subprotocol.
+The goal of this project is to create a funtioning chat room using websockets and the STOMP subprotocol. Once the chat room is complete the next goal is to change the paradigm to a reactive/event driven paradigm using Spring Web Flux and Redis.
