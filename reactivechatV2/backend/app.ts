@@ -1,9 +1,15 @@
 
 import * as test from './src/utils/mongoClient'
+import { startUp } from './src/practice/rabbitmqConnection/TestRabbitClient'
 
-// fs.stat('package.json', (err, stats) => {
-//   console.log(JSON.stringify(stats))
-// })
 
-test.test();
+const main = () => {
+    startUp();
+}
+
+
+
+
+
+main()
 

@@ -47,11 +47,6 @@ interface LiveSession {
   createdAt: Date
 }
 
-
-
-
-
-
 ///////////////////////////////////// MONGO DB SCHEMA Below//////////////////////////////////////////
 // Date and UUID need to be changed to strings for more efficiency 
 interface Session {
