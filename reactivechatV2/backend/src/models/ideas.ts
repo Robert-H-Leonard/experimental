@@ -56,11 +56,11 @@ interface Session {
   expireAt: Date
 }
 
-interface User {
+interface UserEntity {
   id: UUID,
   username: String,
-  createdAt: Date,
-  lastLogin: Date,
+  createdAt: string,
+  lastLogin: string,
   curSession: UUID, // foreign-key
   isLoggedIn: boolean,
   isTyping?: boolean,
