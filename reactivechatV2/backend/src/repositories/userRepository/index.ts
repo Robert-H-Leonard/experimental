@@ -1,16 +1,20 @@
 import moment from "moment";
 import * as _ from "lodash";
+import { Socket } from "socket.io";
 
 export interface User {
     username: string,
     createdAt: string,
+    sockets: {
+        [namespace: string]: Socket
+    },
     isTyping?: boolean,
 }
 
 export interface UserRepository {
     getUserNames: () => Promise<string[]>
     getUser: (username: string) => Promise<User | undefined>
-    addUser: (username: string) => Promise<void>
+    addUser: (username: string, namespace:string, socket: Socket) => Promise<void>
     removeUser: (username: string) => Promise<void>
 }
 
@@ -26,12 +30,15 @@ export class DumbUserRepository implements UserRepository {
         return _.get(this.users, username, undefined);
     }
 
-    addUser = async (username: string) => {
+    addUser = async (username: string , namespace: string, socket: Socket) => {
         this.users = {
             ...this.users,
             [username]: {
                 username,
-                createdAt:  moment().fromNow()
+                createdAt:  moment().fromNow(),
+                sockets: {
+                    [namespace]: socket
+                }
             }
         }
     }

@@ -1,10 +1,10 @@
 
-import * as test from './src/utils/mongoClient'
-import { startUp } from './src/practice/rabbitmqConnection/TestRabbitClient'
+import {start} from "./src/server"
+
 
 
 const main = () => {
-    startUp();
+  start()
 }
 
 
