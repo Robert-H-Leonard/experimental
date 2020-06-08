@@ -5,6 +5,7 @@ import { Socket } from "socket.io";
 export interface User {
     username: string,
     createdAt: string,
+    // Each socket belongs to a different socketio namespace
     sockets: {
         [namespace: string]: Socket
     },
